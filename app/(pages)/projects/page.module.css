@@ -1,0 +1,22 @@
+.title {
+  text-align: center;
+  color: var(--white);
+  font-size: 7.1rem;
+  margin: 2.5rem 0;
+  font-weight: bold;
+}
+.img {
+  width: 100%;
+  height: 100%;
+}
+.linkName {
+  text-decoration: none;
+  color: var(--white);
+  font-size: 2rem;
+  font-weight: bolder;
+  text-transform: capitalize;
+  transition: 0.3s;
+}
+.linkName:hover {
+  text-decoration: underline;
+}

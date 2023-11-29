@@ -1,0 +1,52 @@
+.line {
+  background-color: var(--white);
+  width: 4px;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: top;
+  box-shadow: 0 15px 15px 1px var(--white);
+}
+.one,
+.two,
+.three {
+  width: 30%;
+  position: absolute;
+}
+@media (max-width: 662px) {
+  .one,
+  .two,
+  .three {
+    width: 50%;
+  }
+}
+.one {
+  top: 13%;
+  right: 53%;
+}
+.two {
+  top: 47%;
+  left: 53%;
+}
+.three {
+  bottom: 2%;
+  right: 53%;
+}
+.icons {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+.icon {
+  background-color: var(--white);
+  width: 50px;
+  height: 50px;
+  padding: 3px;
+  border-radius: 50%;
+  fill: var(--dark-color);
+}

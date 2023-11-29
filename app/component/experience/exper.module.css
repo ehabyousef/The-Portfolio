@@ -1,0 +1,36 @@
+.title {
+  text-align: center;
+  color: var(--white);
+  font-size: 6rem;
+  margin: 7rem 0;
+  font-weight: bold;
+}
+.line {
+  position: absolute;
+  width: 4px;
+  height: 100%;
+  left: 3.3rem;
+  top: 10px;
+  background-color: var(--green);
+  transform-origin: top;
+  box-shadow: 0 15px 15px 1px var(--green);
+}
+.circle {
+  -webkit-text-stroke: 0.03em var(--green);
+  stroke-width: 50px;
+  fill: none;
+}
+.list {
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 60%;
+}
+.list:nth-of-type(1) {
+  margin-top: 0;
+}
+.list:last-of-type {
+  margin-bottom: 0;
+}
