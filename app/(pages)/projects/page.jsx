@@ -9,6 +9,9 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import commerce from '../../../public/imags/e-commerce.png';
 import prayer from '../../../public/imags/prayer.png';
 import portfolio from '../../../public/imags/portfolio.png';
+import aflam from '../../../public/imags/aflam.png';
+import f3g from '../../../public/imags/f3g.png';
+import drinks from '../../../public/imags/drink.png';
 const page = () => {
     const FeaturedProject = ({ type, title, summary, img, link, github }) => {
         return (
@@ -67,7 +70,7 @@ const page = () => {
                     transition: { delay: 0.1, duration: 1 },
                 }}
                 className={style.title}
-            >   
+            >
                 Imagination Trumps Knowledge!
             </motion.h1>
             <Box sx={{ margin: '3rem 0' }}>
@@ -88,7 +91,7 @@ const page = () => {
                             title='React portfolio'
                             img={portfolio}
                             link='https://portfolio-75316.web.app/'
-                            github='https://github.com/ehabyousef/socialmedia'
+                            github='https://github.com/ehabyousef/portfolio_React'
                         />
                     </Grid>
                     <Grid xs={6} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -102,30 +105,30 @@ const page = () => {
                     </Grid>
                     <Grid xs={12}>
                         <FeaturedProject
-                            type='Featured Project'
-                            title='E-commerce Website'
-                            summary='A professional E-commerce website using React JS, Framer-motion, and Styled-components. It has smooth page transitions,'
-                            img={commerce}
-                            link='https://github.com/ehabyousef/E_Commerce'
-                            github='https://github.com/ehabyousef/E_Commerce'
+                            type='Featured '
+                            title='aflam Website'
+                            summary='A professional Adlam platform website using React JS, and Styled-components. It has smooth page transitions,and full responsive '
+                            img={aflam}
+                            link='https://github.com/ehabyousef/The-Portfolio'
+                            github='https://github.com/ehabyousef/The-Portfolio'
                         />
                     </Grid>
                     <Grid xs={6} sx={{ display: 'flex', justifyContent: 'center' }}>
                         <Project
-                            type='Portfolio'
-                            title='React portfolio'
-                            img={portfolio}
-                            link='https://portfolio-75316.web.app/'
-                            github='https://github.com/ehabyousef/socialmedia'
+                            type='website'
+                            title='mini e-commerce'
+                            img={f3g}
+                            link='https://github.com/ehabyousef/f3g'
+                            github='https://github.com/ehabyousef/f3g'
                         />
                     </Grid>
                     <Grid xs={6} sx={{ display: 'flex', justifyContent: 'center' }}>
                         <Project
                             type='Website'
                             title='Prayer Guide'
-                            img={prayer}
-                            link='https://silly-squirrel-b16c62.netlify.app/'
+                            img={drinks}
                             github='https://github.com/ehabyousef/prayer-guide'
+                            link='https://ehabyousef.github.io/landing-drinks/indesx.html'
                         />
                     </Grid>
                 </Grid>
