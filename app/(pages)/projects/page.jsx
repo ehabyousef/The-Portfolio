@@ -16,16 +16,16 @@ const page = () => {
     const FeaturedProject = ({ type, title, summary, img, link, github }) => {
         return (
             <Typography component='article' sx={{
-                width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                width: '90%', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 border: "2px solid var(--white)", borderRadius: '25px', padding: "30px", margin: '4rem 0',
-
+                flexDirection: { xs: "column", md: "row" },
                 boxShadow: "6px 6px 2px var(--white)"
             }} >
-                <Link href={link} target='_blank' style={{ width: "50%", overflow: "hidden", borderRadius: '30px' }}>
+                <Link href={link} target='_blank' style={{ width: { xs: "100%", md: "50%" }, overflow: "hidden", borderRadius: '30px' }}>
                     <Image className={style.img} src={img} alt={title} />
                 </Link>
                 <Typography component='div' sx={{
-                    width: '50%', display: 'flex', flexDirection: "column", gap: "10px",
+                    width: { xs: "100%", md: "50%" }, display: 'flex', flexDirection: "column", gap: "10px",
                     paddingLeft: '1rem'
                 }} >
                     <Typography component='span' sx={{ color: "var(--green)", fontSize: '1.5rem', fontWeight: 'bold' }} >{type}</Typography>
@@ -45,8 +45,11 @@ const page = () => {
     const Project = ({ type, title, img, link, github }) => {
         return (
             <Typography component='article' sx={{
-                width: '90%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-                border: "2px solid var(--white)", borderRadius: '25px', padding: "30px", boxShadow: "6px 6px 2px var(--white)"
+                width: '90%', display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                border: "2px solid var(--white)", borderRadius: '25px', padding: "30px",
+                boxShadow: "6px 6px 2px var(--white)"
             }} >
                 <Link href={link} target='_blank' style={{ width: "100%", height: '300px', overflow: "hidden", borderRadius: '30px' }}>
                     <Image className={style.img} src={img} alt={title} />
@@ -79,8 +82,8 @@ const page = () => {
                 Imagination Trumps Knowledge!
             </motion.h1>
             <Box sx={{ margin: '3rem 0' }}>
-                <Grid container spacing={4}>
-                    <Grid xs={12}>
+                <Grid container spacing={4} sx={{}}>
+                    <Grid xs={12} sx={{ display: 'flex', justifyContent: 'center', marginLeft: { xs: "2rem", md: "0" } }}>
                         <FeaturedProject
                             type='Featured Project'
                             title='E-commerce Website'
