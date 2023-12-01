@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Renderer, Transform, Vec3, Color, Polyline } from "ogl";
 import style from "./Home.module.css";
 import Image from "next/image";
@@ -8,12 +8,18 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 const Homes = () => {
     const canvasRef = useRef(null);
-
+    const [mode, setmode] = useState(localStorage.getItem('currentMode'))
     // useEffect(() => {
+
     //     const renderer = new Renderer({ dpr: 2 });
     //     const gl = renderer.gl;
     //     canvasRef.current.appendChild(gl.canvas);
-    //     gl.clearColor(0.1, 0.1, 0.1, 1);
+    //     if (mode === 'dark') {
+    //         gl.clearColor(0.1, 0.1, 0.1, 1);
+
+    //     } else {
+    //         gl.clearColor(237 / 255, 237 / 255, 237 / 255, 1);
+    //     }
 
     //     const scene = new Transform();
     //     const vertex = /* glsl */ `

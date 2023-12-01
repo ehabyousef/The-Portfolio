@@ -11,6 +11,15 @@
     font-size: 3rem;
   }
 }
+.ttext p {
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 30px;
+  color: var(--white);
+}
+.ttext h3 {
+  color: var(--white);
+}
 
 .img {
   width: 100%;
@@ -20,16 +29,14 @@
   border-radius: 10px;
   box-shadow: 6px 6px 2px var(--white);
 }
-.left {
+.static {
   text-align: center;
-  display: flex;
   justify-content: space-between;
-  flex-direction: column;
 }
-.left span {
+.static span {
   font-size: 5rem;
 }
-.left h2 {
+.static h2 {
   font-weight: 300;
 }
 .repeat {
@@ -58,9 +65,4 @@
   position: absolute;
   font-weight: bold;
   padding: 1.2rem 1.5rem;
-}
-.ttext p {
-  font-size: 1.3rem;
-  font-weight: 300;
-  line-height: 30px;
 }

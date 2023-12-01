@@ -1,31 +1,34 @@
 "use client"
 import { AppBar, Box, Button, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import style from './Navbar.module.css';
 import Link from 'next/link';
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Projects', "Articles"];
-
+const navItems = ['Home', 'About', 'Projects'];
+import CloseIcon from '@mui/icons-material/Close';
 const Navbar = (props) => {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
-
+    const [mode, setmode] = useState(localStorage.getItem('currentMode' ?? 'dark'))
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
 
     const drawer = (
-        <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-            <Typography variant="h6" sx={{ my: 2 }}>
-                MUI
-            </Typography>
+        <Box sx={{ textAlign: 'center' }}>
+            <div
+                onClick={handleDrawerToggle}
+                style={{ cursor: "pointer", margin: '1rem 0' }}
+            >
+                <CloseIcon sx={{ width: '40px', height: '40px' }} />
+            </div>
             <Divider />
-            <List>
+            <List sx={{ display: 'flex', flexDirection: "column", gap: "30px" }}>
                 {navItems.map((item) => (
-                    <ListItem key={item} disablePadding>
-                        <ListItemButton sx={{ textAlign: 'center' }}>
-                            <ListItemText primary={item} />
+                    <ListItem key={item} disablePadding >
+                        <ListItemButton sx={{ textAlign: 'center', fontSize: "3rem" }}>
+                            <ListItemText sx={{ fontSize: "3rem" }} primary={item} />
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -34,45 +37,97 @@ const Navbar = (props) => {
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
+    useEffect(() => {
+        if (mode === 'light') {
+            document.body.classList.add('light')
+            document.body.classList.remove('dark')
+        } else {
+            document.body.classList.add('dark')
+            document.body.classList.remove('light')
+
+        }
+    }, [mode])
 
     return (
-        <Box sx={{ display: 'flex', maxHeight: '8vh' }}>
-            <AppBar component="nav" sx={{ backgroundColor: "transparent", position: "static", boxShadow: "none", alignItems: "center", padding: '10px' }}>
-                <Toolbar>
+        <Box sx={{ display: 'flex', maxHeight: '8vh', transition: '.3s', position: 'relative' }}>
+            <AppBar component="nav" sx={{ backgroundColor: "var(--dark-color)", position: "fixed", boxShadow: "none", alignItems: "center", padding: '10px' }}>
+                <Toolbar sx={{ width: '100%', display: 'flex', justifyContent: { sx: 'flex-start', md: 'center' }, alignItems: 'center' }}>
                     <IconButton
-                        color="inherit"
+
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
                         sx={{ mr: 2, display: { sm: 'none' } }}
                     >
-                        <MenuIcon />
+                        <MenuIcon sx={{ width: '40px', height: '40px', color: 'var(--white)' }} />
                     </IconButton>
-                    <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                        <Link className={style.navlist} href='/'>Home</Link>
-                        <Link className={style.navlist} href='/about'>About</Link>
-                        <Link className={style.navlist} href='/projects'>Projects</Link>
-                        <Link className={style.navlist} href='/'>Aricles</Link>
+                    <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: "30px" }}>
+                        <Link className={style.navlist} href='/'>
+                            <button className={style.button}>
+                                <span className={style.span}>Home</span>
+                                <span className={style.span}>Home</span>
+                            </button>
+                        </Link>
+                        <Link className={style.navlist} href='/about'>
+                            <button className={style.button}>
+                                <span className={style.span}>About</span>
+                                <span className={style.span}>About</span>
+                            </button>
+                        </Link>
+                        <Link className={style.navlist} href='/projects'>
+                            <button className={style.button}>
+                                <span className={style.span}>Projects</span>
+                                <span className={style.span}>Projects</span>
+                            </button>
+                        </Link>
                     </Box>
+                    <div
+                        className={style.toggleWrapper}>
+                        <input
+                            onClick={() => {
+                                localStorage.setItem(
+                                    "currentMode",
+                                    mode === "dark" ? "light" : "dark"
+                                );
+                                setmode(localStorage.getItem("currentMode"));
+                            }}
+                            type="checkbox" className="dn" id="dn" />
+                        <label for="dn" className={style.toggle}>
+                            <span className={style.toggle__handler}>
+                                <span className={`${style.crater} ${style.crater_1}`}></span>
+                                <span className={`${style.crater} ${style.crater_2}`}></span>
+                                <span className={`${style.crater} ${style.crater_3}`}></span>
+                            </span>
+                            <span className={`${style.star} ${style.star_1}`}></span>
+                            <span className={`${style.star} ${style.star_2}`}></span>
+                            <span className={`${style.star} ${style.star_3}`}></span>
+                            <span className={`${style.star} ${style.star_4}`}></span>
+                            <span className={`${style.star} ${style.star_5}`}></span>
+                            <span className={`${style.star} ${style.star_6}`}></span>
+                        </label>
+                    </div>
                 </Toolbar>
             </AppBar>
-            <nav>
-                <Drawer
-                    container={container}
-                    variant="temporary"
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                    ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
-                    }}
-                    sx={{
-                        display: { xs: 'block', sm: 'none' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                    }}
-                >
-                    {drawer}
-                </Drawer>
-            </nav>
+
+            <Drawer
+                container={container}
+                variant="temporary"
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                }}
+                sx={{
+                    display: { xs: 'block', sm: 'none' },
+                    '& .MuiDrawer-paper': {
+                        boxSizing: 'border-box',
+                        width: '100vw', backgroundColor: "var(--dark-color)", color: "#d5d5d5"
+                    },
+                    fontSize: '3rem'
+                }}
+            >
+                {drawer}
+            </Drawer>
         </Box>
     );
 };

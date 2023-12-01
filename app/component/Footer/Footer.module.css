@@ -15,8 +15,11 @@
 .foter h4 {
   font-size: 1rem;
   font-weight: 600;
-  line-height: 10px;
   letter-spacing: 1px;
+  color: var(--white);
+}
+.foter h2 {
+  color: var(--white);
 }
 .parent {
   height: 100%;

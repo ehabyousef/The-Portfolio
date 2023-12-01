@@ -17,17 +17,22 @@ const page = () => {
         return (
             <Typography component='article' sx={{
                 width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                border: "2px solid var(--white)", borderRadius: '25px', padding: "30px", margin: '4rem 0', boxShadow: "6px 6px 2px var(--white)"
+                border: "2px solid var(--white)", borderRadius: '25px', padding: "30px", margin: '4rem 0',
+
+                boxShadow: "6px 6px 2px var(--white)"
             }} >
                 <Link href={link} target='_blank' style={{ width: "50%", overflow: "hidden", borderRadius: '30px' }}>
                     <Image className={style.img} src={img} alt={title} />
                 </Link>
-                <Typography component='div' sx={{ width: '50%', display: 'flex', flexDirection: "column", gap: "10px", paddingLeft: '1rem' }} >
+                <Typography component='div' sx={{
+                    width: '50%', display: 'flex', flexDirection: "column", gap: "10px",
+                    paddingLeft: '1rem'
+                }} >
                     <Typography component='span' sx={{ color: "var(--green)", fontSize: '1.5rem', fontWeight: 'bold' }} >{type}</Typography>
                     <Link className={style.linkName} href={link} target='_blank'>
                         <h2>{title}</h2>
                     </Link>
-                    <Typography component='p' sx={{ fontWeight: '500', fontSize: "1rem", lineHeight: '1.5', letterSpacing: '2px' }}>{summary}</Typography>
+                    <Typography component='p' sx={{ fontWeight: '500', fontSize: "1rem", lineHeight: '1.5', letterSpacing: '2px', color: 'var(--white)' }}>{summary}</Typography>
                     <Typography component='div' sx={{ display: "flex", gap: "15px", alignItems: 'center' }}>
                         <Link href={github} target='_blank' style={{ color: 'var(--white)' }}><GitHubIcon sx={{ fontSize: '5rem' }} /></Link>
                         <Link href={link} target='_blank' style={{ backgroundColor: "var(--white)", textDecoration: 'none', padding: "10px 15px", fontSize: '1.7rem', borderRadius: '10px', fontWeight: '600', color: 'var(--dark-color)' }}>visit project</Link>
@@ -85,7 +90,7 @@ const page = () => {
                             github='https://github.com/ehabyousef/E_Commerce'
                         />
                     </Grid>
-                    <Grid xs={6} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', marginTop: { xs: "1.5rem", md: "0" } }}>
                         <Project
                             type='Portfolio'
                             title='React portfolio'
@@ -94,7 +99,7 @@ const page = () => {
                             github='https://github.com/ehabyousef/portfolio_React'
                         />
                     </Grid>
-                    <Grid xs={6} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', marginTop: { xs: "1.5rem", md: "0" } }}>
                         <Project
                             type='Website'
                             title='Prayer Guide'
@@ -113,7 +118,7 @@ const page = () => {
                             github='https://github.com/ehabyousef/The-Portfolio'
                         />
                     </Grid>
-                    <Grid xs={6} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', marginTop: { xs: "1.5rem", md: "0" } }}>
                         <Project
                             type='website'
                             title='mini e-commerce'
@@ -122,7 +127,7 @@ const page = () => {
                             github='https://github.com/ehabyousef/f3g'
                         />
                     </Grid>
-                    <Grid xs={6} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', marginTop: { xs: "1.5rem", md: "0" } }}>
                         <Project
                             type='Website'
                             title='Prayer Guide'

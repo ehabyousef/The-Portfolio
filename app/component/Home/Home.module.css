@@ -2,24 +2,23 @@
   display: none;
 }
 .cana > canvas:nth-child(3) {
-  height: 92vh !important;
-  background-color: #333 !important;
+  min-height: 99vh !important;
   position: relative;
 }
 .cana {
   position: relative;
-  min-height: 92vh;
+  min-height: 98vh;
 }
 .content {
   position: absolute;
   z-index: 1;
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 92vh;
 }
+
 .content img {
   width: 40%;
   height: 100%;
@@ -29,24 +28,47 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
 }
+
 .text h1 {
   font-size: 7rem;
   color: transparent;
   -webkit-text-stroke: 0.03em var(--green);
-  /* transform: translateY(90px); */
-  /* transition: 0.5s; */
+}
+@media (max-width: 900px) {
+  .cana {
+    min-height: 100vh !important;
+  }
+  .content {
+    flex-direction: column;
+    margin: 2rem 0 0 0;
+  }
+  .content img {
+    width: 50%;
+  }
+  .text {
+    width: 100%;
+    margin: 1.5rem 0;
+    height: 100%;
+  }
+  .text h1 {
+    font-size: 4rem;
+    color: transparent;
+    -webkit-text-stroke: 0.03em var(--green);
+  }
 }
 .text h3 {
   font-size: 3rem;
   /* transform: translateY(60px); */
   /* transition: 0.5s; */
+  color: var(--white);
 }
 .text p {
   font-size: 1.3rem;
   letter-spacing: 2px;
   font-weight: 500;
+  color: var(--white);
 }
 .botons {
   display: flex;
@@ -62,7 +84,7 @@
   text-decoration: none;
   border: none;
   border-radius: 0.5em;
-  color: var(--dark-color);
+  color: #1a1a1a;
   box-shadow: 0.5em 0.5em 0.5em var(--dark-color);
   cursor: pointer;
 }
@@ -99,7 +121,7 @@
   font-family: inherit;
   font-size: 20px;
   background: var(--beige);
-  color: var(--dark-color);
+  color: #1a1a1a;
   padding: 0.7em 1em;
   padding-left: 0.9em;
   display: flex;
@@ -149,3 +171,38 @@
     transform: translateY(-0.1em);
   }
 }
+
+@media (max-width: 400px) {
+  .cana {
+    min-height: 130vh !important;
+  }
+  .content img {
+    width: 50%;
+    margin-top: 2rem;
+  }
+}
+@media (405px <= width <= 600px) {
+  .cana {
+    min-height: 110vh !important;
+  }
+}
+/*   
+  .content {
+    flex-direction: column;
+    margin: 2rem 0 0 0;
+  }
+  .content img {
+    width: 50%;
+    margin-top: 2rem;
+  }
+  .text {
+    width: 100%;
+    margin: 1.5rem 0;
+    height: 100%;
+  }
+  .text h1 {
+    font-size: 4rem;
+    color: transparent;
+    -webkit-text-stroke: 0.03em var(--green);
+  }
+} */

@@ -29,6 +29,7 @@ export default function ExperDetails({ position, company, companyLink, time, add
                         textTransform: "capitalize",
                         fontWeight: "bold",
                         fontSize: "1.7rem",
+                        color: 'var(--white)'
                     }}
                 >
                     {position}
@@ -39,6 +40,7 @@ export default function ExperDetails({ position, company, companyLink, time, add
                             fontSize: "1.7rem",
                             fontWeight: "700",
                             textDecoration: "none",
+                            
                         }}
                         href={companyLink}
                         target="_blank"

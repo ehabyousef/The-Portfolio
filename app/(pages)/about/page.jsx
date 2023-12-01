@@ -54,7 +54,10 @@ const page = () => {
                 Passion Fuels Purpose!{" "}
             </motion.h1>
             {/* intro  */}
-            <Grid container spacing={6} sx={{ display: 'flex', flexDirection: { xs: "column", md: "row" }, alignItems: { xs: 'center', md: "inherit" }, padding: '5px 5px', margin: "2rem 0" }}>
+            <Grid container spacing={6} sx={{
+                display: 'flex', flexDirection: { xs: "column", md: "row" }, alignItems: { xs: 'center', md: "inherit" },
+                padding: '5px 5px', margin: "2rem 0"
+            }}>
                 <Grid
                     item
                     xs={12}
@@ -85,7 +88,7 @@ const page = () => {
                 <Grid item xs={4} >
                     <Image className={style.img} src={me} alt="bob" />
                 </Grid>
-                <Grid className={style.left} item xs={3}>
+                <Grid className={style.static} item xs={3} sx={{ display: 'flex', flexDirection: 'column', color: 'var(--white)' }}>
                     <div >
                         <span><AnimateNum value={35} />+</span>
                         <h2>Satisfied Clients</h2>
