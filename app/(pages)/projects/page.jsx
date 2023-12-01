@@ -82,8 +82,8 @@ const page = () => {
                 Imagination Trumps Knowledge!
             </motion.h1>
             <Box sx={{ margin: '3rem 0' }}>
-                <Grid container spacing={4} sx={{}}>
-                    <Grid xs={12} sx={{ display: 'flex', justifyContent: 'center', marginLeft: { xs: "2rem", md: "0" } }}>
+                <Grid container spacing={4} >
+                    <Grid xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
                         <FeaturedProject
                             type='Featured Project'
                             title='E-commerce Website'

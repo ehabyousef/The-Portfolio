@@ -85,7 +85,7 @@ const page = () => {
                         the opportunity to bring my skills and passion to your next project.
                     </p>
                 </Grid>
-                <Grid item xs={4} >
+                <Grid item xs={4} order={-1} >
                     <Image className={style.img} src={me} alt="bob" />
                 </Grid>
                 <Grid className={style.static} item xs={3} sx={{ display: 'flex', flexDirection: 'column', color: 'var(--white)' }}>
