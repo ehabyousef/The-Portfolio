@@ -55,13 +55,14 @@ const page = () => {
             </motion.h1>
             {/* intro  */}
             <Grid container spacing={6} sx={{
-                display: 'flex', flexDirection: { xs: "column", md: "row" }, alignItems: { xs: 'center', md: "inherit" },
+                display: 'flex', flexDirection: { xs: "column", md: "row" }, alignItems: { xs: 'flex-start', md: "inherit" },
                 padding: '5px 5px', margin: "2rem 0"
             }}>
                 <Grid
-                    item
+
                     xs={12}
-                    md={4}
+                    md={6}
+                    lg={4}
                     sx={{ display: "flex", gap: "1.2rem", flexDirection: "column" }}
                     className={style.ttext}
                 >
@@ -85,10 +86,17 @@ const page = () => {
                         the opportunity to bring my skills and passion to your next project.
                     </p>
                 </Grid>
-                <Grid item xs={4} order={-1} >
+                <Grid
+                    xs={4}
+                    md={5}
+                    lg={4}
+                    sx={{ order: { xs: "-1", md: "0" } }} >
                     <Image className={style.img} src={me} alt="bob" />
                 </Grid>
-                <Grid className={style.static} item xs={3} sx={{ display: 'flex', flexDirection: 'column', color: 'var(--white)' }}>
+                <Grid className={style.static}
+                    xs={12}
+                    lg={4}
+                    sx={{ display: 'flex', flexDirection: { xs: "row", lg: "column" }, gap: "1rem", flexWrap: "wrap", color: 'var(--white)' }}>
                     <div >
                         <span><AnimateNum value={35} />+</span>
                         <h2>Satisfied Clients</h2>
@@ -132,7 +140,7 @@ const page = () => {
             <Experience />
             {/* Education  */}
             <Education />
-        </div>
+        </div >
     );
 };
 
