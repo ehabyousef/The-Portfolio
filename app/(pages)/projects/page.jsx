@@ -111,7 +111,7 @@ const page = () => {
                             github='https://github.com/ehabyousef/prayer-guide'
                         />
                     </Grid>
-                    <Grid xs={12}>
+                    <Grid xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
                         <FeaturedProject
                             type='Featured '
                             title='aflam Website'
