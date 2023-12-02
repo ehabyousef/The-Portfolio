@@ -96,7 +96,7 @@ const page = () => {
                 <Grid className={style.static}
                     xs={12}
                     lg={4}
-                    sx={{ display: 'flex', flexDirection: { xs: "row", lg: "column" }, gap: "1rem", flexWrap: "wrap", color: 'var(--white)' }}>
+                    sx={{ display: 'flex', flexDirection: { xs: "row", lg: "column" }, gap: ".5rem", flexWrap: "wrap", color: 'var(--white)' }}>
                     <div >
                         <span><AnimateNum value={35} />+</span>
                         <h2>Satisfied Clients</h2>

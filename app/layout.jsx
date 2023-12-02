@@ -14,7 +14,7 @@ export default function RootLayout({ children, pageProps }) {
     <html lang="en">
       <body className={monters.className}>
         <div className={style.container}>
-          <Navbar/>
+          <Navbar />
           {children}
           <Footer />
         </div>
