@@ -1,14 +1,18 @@
 "use client"
-import { AppBar, Box, Button, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import style from './Navbar.module.css';
 import Link from 'next/link';
-const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Projects'];
 import CloseIcon from '@mui/icons-material/Close';
+import { usePathname } from 'next/navigation'
+
+
 const Navbar = (props) => {
     const { window } = props;
+    const pathname = usePathname()
+    console.log(pathname);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [mode, setmode] = useState(localStorage.getItem('currentMode' ?? 'dark'))
     const handleDrawerToggle = () => {
@@ -44,9 +48,12 @@ const Navbar = (props) => {
         } else {
             document.body.classList.add('dark')
             document.body.classList.remove('light')
-
         }
-    }, [mode])
+        if (pathname === '/') {
+            document.body.classList.add('dark')
+            document.body.classList.remove('light')
+        }
+    }, [mode, pathname])
 
     return (
         <Box sx={{ display: 'flex', maxHeight: '8vh', transition: '.3s', position: 'relative' }}>
@@ -81,31 +88,35 @@ const Navbar = (props) => {
                             </button>
                         </Link>
                     </Box>
-                    <div
-                        className={style.toggleWrapper}>
-                        <input
-                            onClick={() => {
-                                localStorage.setItem(
-                                    "currentMode",
-                                    mode === "dark" ? "light" : "dark"
-                                );
-                                setmode(localStorage.getItem("currentMode"));
-                            }}
-                            type="checkbox" className="dn" id="dn" />
-                        <label for="dn" className={style.toggle}>
-                            <span className={style.toggle__handler}>
-                                <span className={`${style.crater} ${style.crater_1}`}></span>
-                                <span className={`${style.crater} ${style.crater_2}`}></span>
-                                <span className={`${style.crater} ${style.crater_3}`}></span>
-                            </span>
-                            <span className={`${style.star} ${style.star_1}`}></span>
-                            <span className={`${style.star} ${style.star_2}`}></span>
-                            <span className={`${style.star} ${style.star_3}`}></span>
-                            <span className={`${style.star} ${style.star_4}`}></span>
-                            <span className={`${style.star} ${style.star_5}`}></span>
-                            <span className={`${style.star} ${style.star_6}`}></span>
-                        </label>
-                    </div>
+                    {pathname !== '/' ?
+                        <div
+                            className={style.toggleWrapper}>
+                            <input
+                                onClick={() => {
+                                    localStorage.setItem(
+                                        "currentMode",
+                                        mode === "dark" ? "light" : "dark"
+                                    );
+                                    setmode(localStorage.getItem("currentMode"));
+                                }}
+                                type="checkbox" className="dn" id="dn" />
+
+                            <label for="dn" className={style.toggle}>
+                                <span className={style.toggle__handler}>
+                                    <span className={`${style.crater} ${style.crater_1}`}></span>
+                                    <span className={`${style.crater} ${style.crater_2}`}></span>
+                                    <span className={`${style.crater} ${style.crater_3}`}></span>
+                                </span>
+                                <span className={`${style.star} ${style.star_1}`}></span>
+                                <span className={`${style.star} ${style.star_2}`}></span>
+                                <span className={`${style.star} ${style.star_3}`}></span>
+                                <span className={`${style.star} ${style.star_4}`}></span>
+                                <span className={`${style.star} ${style.star_5}`}></span>
+                                <span className={`${style.star} ${style.star_6}`}></span>
+                            </label>
+                        </div>
+                        : ""}
+
                 </Toolbar>
             </AppBar>
 
