@@ -32,7 +32,7 @@ const Navbar = (props) => {
                 {navItems.map((item) => (
                     <ListItem key={item} disablePadding >
                         <ListItemButton sx={{ textAlign: 'center', fontSize: "3rem" }}>
-                            <ListItemText sx={{ fontSize: "3rem" }} primary={item} />
+                            <ListItemText className={style.span} sx={{ fontSize: "3rem" }} primary={item} />
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -132,7 +132,6 @@ const Navbar = (props) => {
                         boxSizing: 'border-box',
                         width: '100vw', backgroundColor: "var(--dark-color)", color: "#d5d5d5"
                     },
-                    fontSize: '3rem'
                 }}
             >
                 {drawer}
