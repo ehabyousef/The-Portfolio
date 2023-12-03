@@ -16,17 +16,11 @@ const Experience = () => {
 
     return (
         <Box sx={{ margin: "5rem 0" }} component='div'>
-            <motion.h1
-                initial={{ opacity: 0, translateY: 10 }}
-                animate={{
-                    translateY: 0,
-                    opacity: 1,
-                    transition: { delay: 0.1, duration: 1 },
-                }}
-                className={style.title}
-            >
-                Experience
-            </motion.h1>
+            <Typography component='h1' sx={{
+                textAlign: 'center', fontSize: { xs: "4rem", md: '6rem' },
+                fontWeight: 'bold',
+                margin: "8rem 0 3rem 0", color: "var(--white)"
+            }}>Experience</Typography>
             <Typography component='div' ref={ref} sx={{ position: 'relative', margin: "0 auto", width: { xs: '100%', md: '75%' } }}>
                 <motion.div
                     style={{ scaleY: scrollYProgress }}

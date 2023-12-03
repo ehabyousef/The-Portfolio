@@ -17,10 +17,11 @@ const Education = () => {
     return (
         <Typography component='div' sx={{ margin: '4rem 0' }}>
             <Typography component='h1' sx={{
-                textAlign: 'center', fontSize: '6rem', fontWeight: 'bold',
+                textAlign: 'center', fontSize: { xs: "4rem", md: '6rem' },
+                fontWeight: 'bold',
                 margin: "8rem 0 3rem 0", color: "var(--white)"
             }}>Education</Typography>
-            <Box ref={ref} sx={{ position: 'relative', minHeight: { xs: "150vh", sm: '80vh' } }}>
+            <Box ref={ref} sx={{ position: 'relative', minHeight: { xs: "115vh", sm: '100vh', lg: '80vh' } }}>
                 <motion.div
                     style={{ scaleY: scrollYProgress }}
                     className={style.line}>

@@ -12,6 +12,7 @@ import portfolio from '../../../public/imags/portfolio.png';
 import aflam from '../../../public/imags/aflam.png';
 import f3g from '../../../public/imags/f3g.png';
 import drinks from '../../../public/imags/drink.png';
+import ScrollTop from '@/app/component/ScrollTop/ScrollTop';
 const page = () => {
     const FeaturedProject = ({ type, title, summary, img, link, github }) => {
         return (
@@ -83,6 +84,7 @@ const page = () => {
             </motion.h1>
             <Box sx={{ margin: '3rem 0' }}>
                 <Grid container spacing={4} >
+                    <ScrollTop />
                     <Grid xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
                         <FeaturedProject
                             type='Featured Project'
