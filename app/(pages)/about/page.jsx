@@ -36,6 +36,7 @@ const Skills = ({ name, x, y }) => {
             initial={{ x: 0, y: 0 }}
             whileInView={{ x: x, y: y }}
             transition={{ duration: .7 }}
+            viewport={{ once: true }}
             className={style.skill}>{name}</motion.div>
     )
 }
@@ -118,12 +119,18 @@ const page = () => {
                 </Grid>
             </Grid>
             {/* skill  */}
-            <Box component='div' sx={{ margin: '3rem 0', display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center" }} className="sk">
-                <Typography component='h1' sx={{ textAlign: "center", color: "var(--white)" }} variant="h1" >Skills</Typography>
+            <Box component='div' sx={{
+                margin: '3rem 0', display: "flex", flexDirection: 'column',
+                justifyContent: "center", alignItems: "center",
+                fontSize: { xs: '.9rem', md: "1.1rem" }
+            }}>
+                <Typography component='h1' sx={{ textAlign: "center", color: "var(--white)", margin: "1rem 0" }} variant="h1" >Skills</Typography>
                 <div className={style.repeat}>
                     <Typography component='div'
                         sx={{
-                            display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: "50%", backgroundColor: "var(--white)", color: "var(--dark-color)",
+                            display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: "50%",
+                            backgroundColor: { xs: "transparent", sm: "var(--white)" },
+                            color: { xs: "var(--white)", sm: "var(--dark-color)" },
                             cursor: "pointer", padding: "1.2rem 1.5rem", fontWeight: 'bold'
                         }}>
                         web
@@ -133,7 +140,7 @@ const page = () => {
                     <Skills name='Js' x="20vw" y="4vw" />
                     <Skills name='React Js' x="0vw" y="12vw" />
                     <Skills name='Next Js' x="-20vw" y="-15vw" />
-                    <Skills name='TypeScript' x="15vw" y="-12vw" />
+                    {/* <Skills name='TypeScript' x="15vw" y="12vw" /> */}
                     <Skills name='Bootsrap' x="15vw" y="-12vw" />
                     <Skills name='Web Design' x="32vw" y="-5vw" />
                     <Skills name='Figma' x="0vw" y="-20vw" />
@@ -141,11 +148,11 @@ const page = () => {
                     <Skills name='Git & Github' x="-27vw" y="7vw" />
                     <Skills name='Sass' x="-18vw" y="17vw" />
                 </div>
-            </Box>
+            </Box >
             {/* experience  */}
-            <Experience />
+            < Experience />
             {/* Education  */}
-            <Education />
+            < Education />
         </div >
     );
 };

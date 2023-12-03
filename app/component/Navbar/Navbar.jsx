@@ -39,7 +39,6 @@ const Navbar = (props) => {
             </List>
         </Box>
     );
-
     const container = window !== undefined ? () => window().document.body : undefined;
     useEffect(() => {
         if (mode === 'light') {
@@ -116,7 +115,6 @@ const Navbar = (props) => {
                             </label>
                         </div>
                         : ""}
-
                 </Toolbar>
             </AppBar>
 

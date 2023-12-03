@@ -12,23 +12,7 @@ const Experience = () => {
             offset: ['start end', 'start start']
         }
     )
-    // const ExpDetails = ({ position, company, companyLink, time, address, work }) => {
-    //     return (
-    //         <Typography component='li' ref={ref} sx={{
-    //             margin: '10px auto', display: 'flex', width: "60%", flexDirection: 'column', alignItems: 'center', justifyContent: "space-between",
-    //             '&:nth-of-type(1)': { marginTop: '0' }, '&:nth-last-of-type': { marginBottom: '0' }
-    //         }}>
-    //             <Icons refer={ref} />
-    //             <div className="d">
-    //                 <Typography component='h3' sx={{ textTransform: "capitalize", fontWeight: 'bold', fontSize: "1.7rem", marginBottom: ".1rem" }}>{position}
-    //                     <Typography component='a' sx={{ color: 'var(--green)', fontSize: "1.7rem", fontWeight: "700", textDecoration: 'none' }} href={companyLink} target="_blank"> @{company}</Typography>
-    //                 </Typography>
-    //                 <Typography component='span' sx={{ textTransform: 'capitalize', fontWeight: '500', color: 'var(--beige)', opacity: '.8' }}>{time} | {address}</Typography>
-    //                 <Typography component='p' sx={{ color: 'var(--white)', margin: '1rem 0', fontSize: '1.3rem' }}>{work}</Typography>
-    //             </div>
-    //         </Typography>
-    //     )
-    // }
+
 
     return (
         <Box sx={{ margin: "5rem 0" }} component='div'>
