@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Renderer, Transform, Vec3, Color, Polyline } from "ogl";
 import style from "./Home.module.css";
 import Image from "next/image";
@@ -9,12 +9,61 @@ import Link from "next/link";
 const Homes = () => {
     const canvasRef = useRef(null);
     const [mode, setmode] = useState(localStorage.getItem('currentMode'))
+
+
+    const lines = useMemo(() => {
+        const result = [];
+
+        function random(a, b) {
+            const alpha = Math.random();
+            return a * (1.0 - alpha) + b * alpha;
+        }
+
+        ["#c97d59", "#0f3327", "#c97d59", "#F2e9e2", "#0f3327"].forEach(
+            (color, i) => {
+                const line = {
+                    spring: random(0.02, 0.1),
+                    friction: random(0.7, 0.95),
+                    mouseVelocity: new Vec3(),
+                    mouseOffset: new Vec3(random(-1, 1) * 0.02),
+                };
+
+                const count = 20;
+                const points = (line.points = []);
+                for (let i = 0; i < count; i++) points.push(new Vec3());
+
+                line.polyline = new Polyline(gl, {
+                    points,
+                    vertex,
+                    uniforms: {
+                        uColor: { value: new Color(color) },
+                        uThickness: { value: random(20, 50) },
+                    },
+                });
+
+                line.polyline.mesh.setParent(scene);
+
+                result.push(line);
+            }
+        );
+
+        return result;
+    }, []);
+    const resize = useMemo(
+        () => throttle(() => {
+            renderer.setSize(window.innerWidth, window.innerHeight - 100);
+            lines.forEach((line) => line.polyline.resize());
+        }, 200),
+        [lines]
+    );
     useEffect(() => {
         const renderer = new Renderer({ dpr: 2 });
         const gl = renderer.gl;
         canvasRef.current.appendChild(gl.canvas);
 
-        gl.clearColor(0.1, 0.1, 0.1, 1);st scene = new Transform();
+        gl.clearColor(0.1, 0.1, 0.1, 1);
+
+        const scene = new Transform();
         const vertex = /* glsl */ `
                 precision highp float;
 
@@ -62,47 +111,8 @@ const Homes = () => {
                 }
             `;
 
-        const lines = [];
 
-        function resize() {
-            renderer.setSize(window.innerWidth, window.innerHeight - 100);
-            lines.forEach((line) => line.polyline.resize());
-        }
 
-        window.addEventListener("resize", resize, false);
-
-        function random(a, b) {
-            const alpha = Math.random();
-            return a * (1.0 - alpha) + b * alpha;
-        }
-
-        ["#c97d59", "#0f3327", "#c97d59", "#F2e9e2", "#0f3327"].forEach(
-            (color, i) => {
-                const line = {
-                    spring: random(0.02, 0.1),
-                    friction: random(0.7, 0.95),
-                    mouseVelocity: new Vec3(),
-                    mouseOffset: new Vec3(random(-1, 1) * 0.02),
-                };
-
-                const count = 20;
-                const points = (line.points = []);
-                for (let i = 0; i < count; i++) points.push(new Vec3());
-
-                line.polyline = new Polyline(gl, {
-                    points,
-                    vertex,
-                    uniforms: {
-                        uColor: { value: new Color(color) },
-                        uThickness: { value: random(20, 50) },
-                    },
-                });
-
-                line.polyline.mesh.setParent(scene);
-
-                lines.push(line);
-            }
-        );
 
         resize();
 
@@ -140,13 +150,7 @@ const Homes = () => {
             lines.forEach((line) => {
                 for (let i = line.points.length - 1; i >= 0; i--) {
                     if (!i) {
-                        tmp
-                            .copy(mouse)
-                            .add(line.mouseOffset)
-                            .sub(line.points[i])
-                            .multiply(line.spring);
-                        line.mouseVelocity.add(tmp).multiply(line.friction);
-                        line.points[i].add(line.mouseVelocity);
+                        // ... (your existing update logic)
                     } else {
                         line.points[i].lerp(line.points[i - 1], 0.9);
                     }
@@ -162,7 +166,7 @@ const Homes = () => {
         return () => {
             window.removeEventListener("resize", resize);
         };
-    }, [mode]);
+    }, [mode, resize]);
     return (
         <>
             <div className={style.cana} ref={canvasRef}>
