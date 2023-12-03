@@ -183,7 +183,7 @@
 }
 @media (405px <= width <= 600px) {
   .cana {
-    min-height: 110vh !important;
+    min-height: 120vh !important;
   }
 }
 /*   

@@ -172,7 +172,7 @@ const Homes = () => {
         <>
             <div className={style.cana} ref={canvasRef}>
                 <div className={style.content}>
-                    <Image src={dev} className={style.img} alt="hero"></Image>
+                    <Image src={dev} className={style.img} priority={Homes} alt="hero"></Image>
                     <div className={style.text}>
                         <motion.h1
                             initial={{ opacity: 0, translateY: 100 }}

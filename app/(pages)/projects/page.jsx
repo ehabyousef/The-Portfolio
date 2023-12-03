@@ -85,7 +85,7 @@ const page = () => {
             <Box sx={{ margin: '3rem 0' }}>
                 <Grid container spacing={4} >
                     <ScrollTop />
-                    <Grid xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Grid xs={12} sx={{ display: 'flex', justifyContent: { xs: "flex-end", sm: 'center' } }}>
                         <FeaturedProject
                             type='Featured Project'
                             title='E-commerce Website'
@@ -95,7 +95,7 @@ const page = () => {
                             github='https://github.com/ehabyousef/E_Commerce'
                         />
                     </Grid>
-                    <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', marginTop: { xs: "1.5rem", md: "0" } }}>
+                    <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: { xs: "flex-end", sm: 'center' }, marginTop: { xs: "1.5rem", md: "0" } }}>
                         <Project
                             type='Portfolio'
                             title='React portfolio'
@@ -104,7 +104,7 @@ const page = () => {
                             github='https://github.com/ehabyousef/portfolio_React'
                         />
                     </Grid>
-                    <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', marginTop: { xs: "1.5rem", md: "0" } }}>
+                    <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: { xs: "flex-end", sm: 'center' }, marginTop: { xs: "1.5rem", md: "0" } }}>
                         <Project
                             type='Website'
                             title='Prayer Guide'
@@ -113,7 +113,7 @@ const page = () => {
                             github='https://github.com/ehabyousef/prayer-guide'
                         />
                     </Grid>
-                    <Grid xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Grid xs={12} sx={{ display: 'flex', justifyContent: { xs: "flex-end", sm: 'center' } }}>
                         <FeaturedProject
                             type='Featured '
                             title='aflam Website'
@@ -123,7 +123,7 @@ const page = () => {
                             github='https://github.com/ehabyousef/The-Portfolio'
                         />
                     </Grid>
-                    <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', marginTop: { xs: "1.5rem", md: "0" } }}>
+                    <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: { xs: "flex-end", sm: 'center' }, marginTop: { xs: "1.5rem", md: "0" } }}>
                         <Project
                             type='website'
                             title='mini e-commerce'
@@ -132,7 +132,7 @@ const page = () => {
                             github='https://github.com/ehabyousef/f3g'
                         />
                     </Grid>
-                    <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', marginTop: { xs: "1.5rem", md: "0" } }}>
+                    <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: { xs: "flex-end", sm: 'center' }, marginTop: { xs: "1.5rem", md: "0" } }}>
                         <Project
                             type='Website'
                             title='Prayer Guide'
