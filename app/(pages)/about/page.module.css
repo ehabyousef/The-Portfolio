@@ -34,7 +34,7 @@
   border: 2px solid var(--white);
   padding: 1rem;
   margin-left: 7rem;
-    border-radius: 10px;
+  border-radius: 10px;
   box-shadow: 6px 6px 2px var(--white);
 }
 @media (max-width: 1350px) {
@@ -56,10 +56,17 @@
 }
 .static {
   text-align: center;
-
 }
 .static span {
   font-size: 5rem;
+}
+@media (max-width: 600px) {
+  .static span {
+    font-size: 2rem;
+  }
+  .static {
+    margin-right: 3rem;
+  }
 }
 .static h2 {
   font-weight: 300;
