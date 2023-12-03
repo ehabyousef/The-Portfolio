@@ -7,6 +7,7 @@ import Image from "next/image";
 import me from '../../../public/imags/WhatsApp Image 2023-11-26 at 22.20.43_c2e56ec9.jpg';
 import Experience from "@/app/component/experience/Experience";
 import Education from "@/app/component/Education/Education";
+import ScrollTop from "@/app/component/ScrollTop/ScrollTop";
 const AnimateNum = ({ value }) => {
     const ref = useRef(null)
     const motionValue = useMotionValue(0)
@@ -58,6 +59,7 @@ const page = () => {
                 display: 'flex', flexDirection: { xs: "column", md: "row" }, alignItems: { xs: 'flex-start', md: "inherit" },
                 padding: '5px 5px', margin: "2rem 0"
             }}>
+                <ScrollTop />
                 <Grid
 
                     xs={12}
@@ -90,13 +92,13 @@ const page = () => {
                     xs={4}
                     md={5}
                     lg={4}
-                    sx={{ order: { xs: "-1", md: "0" } }} >
+                    sx={{ order: { xs: "-1", md: "0" }, display: 'flex', justifyContent: '' }} >
                     <Image className={style.img} src={me} alt="bob" />
                 </Grid>
                 <Grid className={style.static}
                     xs={12}
                     lg={4}
-                    sx={{ display: 'flex', flexDirection: { xs: "row", lg: "column" }, gap: ".5rem", flexWrap: "wrap", color: 'var(--white)' }}>
+                    sx={{ display: 'flex', flexDirection: { xs: "row", lg: "column" }, gap: ".5rem", flexWrap: "wrap", color: 'var(--white)', justifyContent: { xs: "space-evenly", xlg: 'space-between' } }}>
                     <div >
                         <span><AnimateNum value={35} />+</span>
                         <h2>Satisfied Clients</h2>

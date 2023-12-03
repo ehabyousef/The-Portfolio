@@ -48,7 +48,7 @@
 @media (max-width: 900px) {
   .img {
     width: 70vw;
-    height: 60vh;
+    height: 50vh;
     padding-top: 0;
     margin-left: 1rem;
     margin-bottom: 1rem;
@@ -56,7 +56,7 @@
 }
 .static {
   text-align: center;
-  justify-content: space-between;
+
 }
 .static span {
   font-size: 5rem;
