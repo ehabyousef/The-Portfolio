@@ -27,7 +27,7 @@ const Experience = () => {
             >
                 Experience
             </motion.h1>
-            <Typography component='div' ref={ref} sx={{ position: 'relative', margin: "0 auto", width: '75%' }}>
+            <Typography component='div' ref={ref} sx={{ position: 'relative', margin: "0 auto", width: { xs: '100%', md: '75%' } }}>
                 <motion.div
                     style={{ scaleY: scrollYProgress }}
                     className={style.line}>

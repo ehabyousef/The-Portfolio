@@ -21,14 +21,15 @@ export default function ExperDetails({ position, company, companyLink, time, add
             }}
         >
             <Icons refer={ref} />
-            <motion.div
-                className="d">
+            <Typography component='div'
+                sx={{ marginLeft: { xs: "1rem", md: '0' } }}
+            >
                 <Typography
                     component="h3"
                     sx={{
                         textTransform: "capitalize",
                         fontWeight: "bold",
-                        fontSize: "1.7rem",
+                        fontSize: { xs: '1.3rem', md: '1.7rem' },
                         color: 'var(--white)'
                     }}
                 >
@@ -37,10 +38,10 @@ export default function ExperDetails({ position, company, companyLink, time, add
                         component="a"
                         sx={{
                             color: "var(--green)",
-                            fontSize: "1.7rem",
+                            fontSize: { xs: '1.3rem', md: '1.7rem' },
                             fontWeight: "700",
                             textDecoration: "none",
-                            
+
                         }}
                         href={companyLink}
                         target="_blank"
@@ -62,11 +63,11 @@ export default function ExperDetails({ position, company, companyLink, time, add
                 </Typography>
                 <Typography
                     component="p"
-                    sx={{ color: "var(--white)", fontSize: "1.3rem" }}
+                    sx={{ color: "var(--white)", fontSize: { xs: '1rem', md: '1.3rem' } }}
                 >
                     {work}
                 </Typography>
-            </motion.div>
+            </Typography>
         </Typography >
     );
 }
