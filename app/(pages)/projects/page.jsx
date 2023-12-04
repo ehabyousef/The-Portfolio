@@ -13,6 +13,7 @@ import aflam from '../../../public/imags/aflam.png';
 import f3g from '../../../public/imags/f3g.png';
 import drinks from '../../../public/imags/drink.png';
 import ScrollTop from '@/app/component/ScrollTop/ScrollTop';
+import Transition from '@/app/component/Transition/Transition';
 const page = () => {
     const FeaturedProject = ({ type, title, summary, img, link, github }) => {
         return (
@@ -71,6 +72,7 @@ const page = () => {
 
     return (
         <div>
+            <Transition />
             <motion.h1
                 initial={{ opacity: 0, translateY: 10 }}
                 animate={{

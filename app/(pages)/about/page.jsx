@@ -8,6 +8,7 @@ import me from '../../../public/imags/WhatsApp Image 2023-11-26 at 22.20.43_c2e5
 import Experience from "@/app/component/experience/Experience";
 import Education from "@/app/component/Education/Education";
 import ScrollTop from "@/app/component/ScrollTop/ScrollTop";
+import Transition from "@/app/component/Transition/Transition";
 const AnimateNum = ({ value }) => {
     const ref = useRef(null)
     const motionValue = useMotionValue(0)
@@ -44,6 +45,7 @@ const Skills = ({ name, x, y }) => {
 const page = () => {
     return (
         <div>
+            <Transition />
             <motion.h1
                 initial={{ opacity: 0, translateY: 10 }}
                 animate={{
