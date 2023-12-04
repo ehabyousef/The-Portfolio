@@ -1,4 +1,4 @@
-import { Inter, Montserrat } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "./component/Navbar/Navbar";
 import Footer from "./component/Footer/Footer";

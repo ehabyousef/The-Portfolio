@@ -5,9 +5,11 @@ import Image from "next/image";
 import dev from "../../../public/imags/circle.png";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Transition from "../Transition/Transition";
 const Homes = () => {
     return (
         <div className={style.cana}>
+            <Transition />
             <div className={style.content}>
                 <Image src={dev} className={style.img} alt="hero"></Image>
                 <div className={style.text}>
