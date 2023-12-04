@@ -8,165 +8,142 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 const Homes = () => {
     const canvasRef = useRef(null);
-    const [mode, setmode] = useState(localStorage.getItem('currentMode'))
+    // useEffect(() => {
+    //     let renderer;
+    //     let gl;
+    //     let scene;
+    //     let lines;
+    //     let vertex;
+    //     function init() {
+    //         renderer = new Renderer({ dpr: 2 });
+    //         gl = renderer.gl;
+    //         document.body.appendChild(gl.canvas);
+    //         gl.clearColor(0.9, 0.9, 0.9, 1);
 
+    //         scene = new Transform();
+    //         lines = [];
 
-    const lines = useMemo(() => {
-        const result = [];
+    //         resize();
+    //         createLines();
+    //         animate();
+    //     }
 
-        function random(a, b) {
-            const alpha = Math.random();
-            return a * (1.0 - alpha) + b * alpha;
-        }
+    //     function resize() {
+    //         renderer.setSize(window.innerWidth, window.innerHeight);
+    //         lines.forEach((line) => line.polyline.resize());
+    //     }
 
-        ["#c97d59", "#0f3327", "#c97d59", "#F2e9e2", "#0f3327"].forEach(
-            (color, i) => {
-                const line = {
-                    spring: random(0.02, 0.1),
-                    friction: random(0.7, 0.95),
-                    mouseVelocity: new Vec3(),
-                    mouseOffset: new Vec3(random(-1, 1) * 0.02),
-                };
+    //     function createLines() {
+    //         function random(a, b) {
+    //             const alpha = Math.random();
+    //             return a * (1.0 - alpha) + b * alpha;
+    //         }
 
-                const count = 20;
-                const points = (line.points = []);
-                for (let i = 0; i < count; i++) points.push(new Vec3());
+    //         ['#e09f7d', '#ef5d60', '#ec4067', '#a01a7d', '#311847'].forEach((color, i) => {
+    //             const line = {
+    //                 spring: random(0.02, 0.1),
+    //                 friction: random(0.7, 0.95),
+    //                 mouseVelocity: new Vec3(),
+    //                 mouseOffset: new Vec3(random(-1, 1) * 0.02),
+    //             };
 
-                line.polyline = new Polyline(gl, {
-                    points,
-                    vertex,
-                    uniforms: {
-                        uColor: { value: new Color(color) },
-                        uThickness: { value: random(20, 50) },
-                    },
-                });
+    //             const count = 20;
+    //             const points = (line.points = []);
+    //             for (let i = 0; i < count; i++) points.push(new Vec3());
 
-                line.polyline.mesh.setParent(scene);
+    //             line.polyline = new Polyline(gl, {
+    //                 points,
+    //                 vertex,
+    //                 uniforms: {
+    //                     uColor: { value: new Color(color) },
+    //                     uThickness: { value: random(20, 50) },
+    //                 },
+    //             });
 
-                result.push(line);
-            }
-        );
+    //             line.polyline.mesh.setParent(scene);
 
-        return result;
-    }, []);
-    const resize = useMemo(
-        () => throttle(() => {
-            renderer.setSize(window.innerWidth, window.innerHeight - 100);
-            lines.forEach((line) => line.polyline.resize());
-        }, 200),
-        [lines]
-    );
-    useEffect(() => {
-        const renderer = new Renderer({ dpr: 2 });
-        const gl = renderer.gl;
-        canvasRef.current.appendChild(gl.canvas);
+    //             lines.push(line);
+    //         });
+    //     }
 
-        gl.clearColor(0.1, 0.1, 0.1, 1);
+    //     function handleContextLost(event) {
+    //         event.preventDefault();
+    //         console.warn('WebGL context lost. Attempting recovery...');
+    //         // Implement context recovery logic if needed
+    //         // You may need to recreate WebGL resources here
+    //         // For example, you could call a function to reinitialize everything
+    //         recreateWebGLResources();
+    //         init();
+    //     }
 
-        const scene = new Transform();
-        const vertex = /* glsl */ `
-                precision highp float;
+    //     function handleContextRestored() {
+    //         console.log('WebGL context restored.');
+    //         // Implement context restoration logic if needed
+    //         // You may need to recreate WebGL resources here
+    //         // For example, you could call a function to reinitialize everything
+    //         recreateWebGLResources();
+    //         init();
+    //     }
 
-                attribute vec3 position;
-                attribute vec3 next;
-                attribute vec3 prev;
-                attribute vec2 uv;
-                attribute float side;
+    //     gl?.canvas.addEventListener('webglcontextlost', handleContextLost, false);
+    //     gl?.canvas.addEventListener('webglcontextrestored', handleContextRestored, false);
+    //     window.addEventListener('resize', resize, false);
+    //     function animate() {
+    //         const mouse = new Vec3();
 
-                uniform vec2 uResolution;
-                uniform float uDPR;
-                uniform float uThickness;
+    //         if ('ontouchstart' in window) {
+    //             window.addEventListener('touchstart', updateMouse, false);
+    //             window.addEventListener('touchmove', updateMouse, false);
+    //         } else {
+    //             window.addEventListener('mousemove', updateMouse, false);
+    //         }
 
-                vec4 getPosition() {
-                    vec4 current = vec4(position, 1);
+    //         function updateMouse(e) {
+    //             if (e.changedTouches && e.changedTouches.length) {
+    //                 e.x = e.changedTouches[0].pageX;
+    //                 e.y = e.changedTouches[0].pageY;
+    //             }
+    //             if (e.x === undefined) {
+    //                 e.x = e.pageX;
+    //                 e.y = e.pageY;
+    //             }
 
-                    vec2 aspect = vec2(uResolution.x / uResolution.y, 1);
-                    vec2 nextScreen = next.xy * aspect;
-                    vec2 prevScreen = prev.xy * aspect;
+    //             mouse.set((e.x / gl.renderer.width) * 2 - 1, (e.y / gl.renderer.height) * -2 + 1, 0);
+    //         }
 
-                    // Calculate the tangent direction
-                    vec2 tangent = normalize(nextScreen - prevScreen);
+    //         const tmp = new Vec3();
 
-                    // Rotate 90 degrees to get the normal
-                    vec2 normal = vec2(-tangent.y, tangent.x);
-                    normal /= aspect;
+    //         function update(t) {
+    //             requestAnimationFrame(update);
 
-                    // Taper the line to be fatter in the middle, and skinny at the ends using the uv.y
-                    normal *= mix(1.0, 0.1, pow(abs(uv.y - 0.5) * 2.0, 2.0) );
+    //             lines.forEach((line) => {
+    //                 for (let i = line.points.length - 1; i >= 0; i--) {
+    //                     if (!i) {
+    //                         tmp.copy(mouse).add(line.mouseOffset).sub(line.points[i]).multiply(line.spring);
+    //                         line.mouseVelocity.add(tmp).multiply(line.friction);
+    //                         line.points[i].add(line.mouseVelocity);
+    //                     } else {
+    //                         line.points[i].lerp(line.points[i - 1], 0.9);
+    //                     }
+    //                 }
+    //                 line.polyline.updateGeometry();
+    //             });
 
-                    // When the points are on top of each other, shrink the line to avoid artifacts.
-                    float dist = length(nextScreen - prevScreen);
-                    normal *= smoothstep(0.0, 0.02, dist);
+    //             renderer.render({ scene });
+    //         }
 
-                    float pixelWidthRatio = 1.0 / (uResolution.y / uDPR);
-                    float pixelWidth = current.w * pixelWidthRatio;
-                    normal *= pixelWidth * uThickness;
-                    current.xy -= normal * side;
+    //         requestAnimationFrame(update);
+    //     }
+    //     function cleanup() {
+    //         gl?.canvas.removeEventListener('webglcontextlost', handleContextLost);
+    //         gl?.canvas.removeEventListener('webglcontextrestored', handleContextRestored);
+    //         window.removeEventListener('resize', resize);
+    //     }
+    //     init();
 
-                    return current;
-                }
+    //     return cleanup;
 
-                void main() {
-                    gl_Position = getPosition();
-                }
-            `;
-
-
-
-
-        resize();
-
-        const mouse = new Vec3();
-
-        if ("ontouchstart" in window) {
-            window.addEventListener("touchstart", updateMouse, false);
-            window.addEventListener("touchmove", updateMouse, false);
-        } else {
-            window.addEventListener("mousemove", updateMouse, false);
-        }
-
-        function updateMouse(e) {
-            if (e.changedTouches && e.changedTouches.length) {
-                e.x = e.changedTouches[0].pageX;
-                e.y = e.changedTouches[0].pageY;
-            }
-            if (e.x === undefined) {
-                e.x = e.pageX;
-                e.y = e.pageY;
-            }
-
-            mouse.set(
-                (e.x / gl.renderer.width) * 2 - 1,
-                (e.y / gl.renderer.height) * -2 + 1,
-                0
-            );
-        }
-
-        const tmp = new Vec3();
-
-        function update(t) {
-            requestAnimationFrame(update);
-
-            lines.forEach((line) => {
-                for (let i = line.points.length - 1; i >= 0; i--) {
-                    if (!i) {
-                        // ... (your existing update logic)
-                    } else {
-                        line.points[i].lerp(line.points[i - 1], 0.9);
-                    }
-                }
-                line.polyline.updateGeometry();
-            });
-
-            renderer.render({ scene });
-        }
-
-        requestAnimationFrame(update);
-
-        return () => {
-            window.removeEventListener("resize", resize);
-        };
-    }, [mode, resize]);
+    // }, []);
     return (
         <>
             <div className={style.cana} ref={canvasRef}>
