@@ -20,7 +20,7 @@ body {
   --red: #da3a27;
 }
 .light {
-  --dark-color: #ededed;
+  --dark-color: hsl(10, 10%, 93%);
   --green: #146956;
   --beige: #cab08f;
   --white: rgb(24, 23, 23);
