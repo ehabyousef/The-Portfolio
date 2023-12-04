@@ -18,7 +18,9 @@
     "next": "14.0.3",
     "ogl": "^1.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-three-fiber": "^6.0.13",
+    "three": "^0.159.0"
   },
   "devDependencies": {
     "eslint": "^8",

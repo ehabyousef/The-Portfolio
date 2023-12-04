@@ -1,159 +1,183 @@
-// components/Polly.js
-import { useEffect, useRef } from 'react';
-import { Renderer, Transform, Vec3, Color, Polyline } from 'ogl';
-import style from '../Home/Home.module.css';
-const Polly = () => {
-    const canvasRef = useRef(null);
-    useEffect(() => {
-        const vertex = /* glsl */ `
-                precision highp float;
+import { Geometry } from 'ogl/src/core/Geometry';
+import { Program } from 'ogl/src/core/Program.js';
+import { Mesh } from 'ogl/src//core/Mesh.js';
+import { Vec2 } from 'ogl/src/math/Vec2.js';
+import { Vec3 } from 'ogl/src//math/Vec3.js';
+import { Color } from 'ogl/src/math/Color.js';
 
-                attribute vec3 position;
-                attribute vec3 next;
-                attribute vec3 prev;
-                attribute vec2 uv;
-                attribute float side;
+const tmp = /* @__PURE__ */ new Vec3();
 
-                uniform vec2 uResolution;
-                uniform float uDPR;
-                uniform float uThickness;
+export class Polyline {
+    constructor(
+        gl,
+        {
+            points, // Array of Vec3s
+            vertex = defaultVertex,
+            fragment = defaultFragment,
+            uniforms = {},
+            attributes = {}, // For passing in custom attribs
+        }
+    ) {
+        this.gl = gl;
+        this.points = points;
+        this.count = points.length;
 
-                vec4 getPosition() {
-                    vec4 current = vec4(position, 1);
+        // Create buffers
+        this.position = new Float32Array(this.count * 3 * 2);
+        this.prev = new Float32Array(this.count * 3 * 2);
+        this.next = new Float32Array(this.count * 3 * 2);
+        const side = new Float32Array(this.count * 1 * 2);
+        const uv = new Float32Array(this.count * 2 * 2);
+        const index = new Uint16Array((this.count - 1) * 3 * 2);
 
-                    vec2 aspect = vec2(uResolution.x / uResolution.y, 1);
-                    vec2 nextScreen = next.xy * aspect;
-                    vec2 prevScreen = prev.xy * aspect;
+        // Set static buffers
+        for (let i = 0; i < this.count; i++) {
+            side.set([-1, 1], i * 2);
+            const v = i / (this.count - 1);
+            uv.set([0, v, 1, v], i * 4);
 
-                    // Calculate the tangent direction
-                    vec2 tangent = normalize(nextScreen - prevScreen);
-
-                    // Rotate 90 degrees to get the normal
-                    vec2 normal = vec2(-tangent.y, tangent.x);
-                    normal /= aspect;
-
-                    // Taper the line to be fatter in the middle, and skinny at the ends using the uv.y
-                    normal *= mix(1.0, 0.1, pow(abs(uv.y - 0.5) * 2.0, 2.0) );
-
-                    // When the points are on top of each other, shrink the line to avoid artifacts.
-                    float dist = length(nextScreen - prevScreen);
-                    normal *= smoothstep(0.0, 0.02, dist);
-
-                    float pixelWidthRatio = 1.0 / (uResolution.y / uDPR);
-                    float pixelWidth = current.w * pixelWidthRatio;
-                    normal *= pixelWidth * uThickness;
-                    current.xy -= normal * side;
-
-                    return current;
-                }
-
-                void main() {
-                    gl_Position = getPosition();
-                }
-            `;
-
-        const renderer = new Renderer({ dpr: 2 });
-        const gl = renderer.gl;
-        document.body.appendChild(gl.canvas);
-        gl.clearColor(0.9, 0.9, 0.9, 1);
-
-        const scene = new Transform();
-
-        const lines = [];
-
-        function resize() {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            lines.forEach((line) => line.polyline.resize());
+            if (i === this.count - 1) continue;
+            const ind = i * 2;
+            index.set([ind + 0, ind + 1, ind + 2], (ind + 0) * 3);
+            index.set([ind + 2, ind + 1, ind + 3], (ind + 1) * 3);
         }
 
-        window.addEventListener('resize', resize, false);
+        const geometry = (this.geometry = new Geometry(
+            gl,
+            Object.assign(attributes, {
+                position: { size: 3, data: this.position },
+                prev: { size: 3, data: this.prev },
+                next: { size: 3, data: this.next },
+                side: { size: 1, data: side },
+                uv: { size: 2, data: uv },
+                index: { size: 1, data: index },
+            })
+        ));
 
-        function random(a, b) {
-            const alpha = Math.random();
-            return a * (1.0 - alpha) + b * alpha;
-        }
+        // Populate dynamic buffers
+        this.updateGeometry();
 
-        ['#e09f7d', '#ef5d60', '#ec4067', '#a01a7d', '#311847'].forEach((color, i) => {
-            const line = {
-                spring: random(0.02, 0.1),
-                friction: random(0.7, 0.95),
-                mouseVelocity: new Vec3(),
-                mouseOffset: new Vec3(random(-1, 1) * 0.02),
-            };
+        if (!uniforms.uResolution) this.resolution = uniforms.uResolution = { value: new Vec2() };
+        if (!uniforms.uDPR) this.dpr = uniforms.uDPR = { value: 1 };
+        if (!uniforms.uThickness) this.thickness = uniforms.uThickness = { value: 1 };
+        if (!uniforms.uColor) this.color = uniforms.uColor = { value: new Color('#000') };
+        if (!uniforms.uMiter) this.miter = uniforms.uMiter = { value: 1 };
 
-            const count = 20;
-            const points = (line.points = []);
-            for (let i = 0; i < count; i++) points.push(new Vec3());
+        // Set size uniforms' values
+        this.resize();
 
-            line.polyline = new Polyline(gl, {
-                points,
-                vertex,
-                uniforms: {
-                    uColor: { value: new Color(color) },
-                    uThickness: { value: random(20, 50) },
-                },
-            });
+        const program = (this.program = new Program(gl, {
+            vertex,
+            fragment,
+            uniforms,
+        }));
 
-            line.polyline.mesh.setParent(scene);
+        this.mesh = new Mesh(gl, { geometry, program });
+    }
 
-            lines.push(line);
+    updateGeometry() {
+        this.points.forEach((p, i) => {
+            p.toArray(this.position, i * 3 * 2);
+            p.toArray(this.position, i * 3 * 2 + 3);
+
+            if (!i) {
+                // If first point, calculate prev using the distance to 2nd point
+                tmp.copy(p)
+                    .sub(this.points[i + 1])
+                    .add(p);
+                tmp.toArray(this.prev, i * 3 * 2);
+                tmp.toArray(this.prev, i * 3 * 2 + 3);
+            } else {
+                p.toArray(this.next, (i - 1) * 3 * 2);
+                p.toArray(this.next, (i - 1) * 3 * 2 + 3);
+            }
+
+            if (i === this.points.length - 1) {
+                // If last point, calculate next using distance to 2nd last point
+                tmp.copy(p)
+                    .sub(this.points[i - 1])
+                    .add(p);
+                tmp.toArray(this.next, i * 3 * 2);
+                tmp.toArray(this.next, i * 3 * 2 + 3);
+            } else {
+                p.toArray(this.prev, (i + 1) * 3 * 2);
+                p.toArray(this.prev, (i + 1) * 3 * 2 + 3);
+            }
         });
 
-        resize();
+        this.geometry.attributes.position.needsUpdate = true;
+        this.geometry.attributes.prev.needsUpdate = true;
+        this.geometry.attributes.next.needsUpdate = true;
+    }
 
-        const mouse = new Vec3();
-        if ('ontouchstart' in window) {
-            window.addEventListener('touchstart', updateMouse, false);
-            window.addEventListener('touchmove', updateMouse, false);
-        } else {
-            window.addEventListener('mousemove', updateMouse, false);
-        }
+    // Only need to call if not handling resolution uniforms manually
+    resize() {
+        // Update automatic uniforms if not overridden
+        if (this.resolution) this.resolution.value.set(this.gl.canvas.width, this.gl.canvas.height);
+        if (this.dpr) this.dpr.value = this.gl.renderer.dpr;
+    }
+}
 
-        function updateMouse(e) {
-            if (e.changedTouches && e.changedTouches.length) {
-                e.x = e.changedTouches[0].pageX;
-                e.y = e.changedTouches[0].pageY;
-            }
-            if (e.x === undefined) {
-                e.x = e.pageX;
-                e.y = e.pageY;
-            }
+const defaultVertex = /* glsl */ `
+    precision highp float;
 
-            mouse.set((e.x / gl.renderer.width) * 2 - 1, (e.y / gl.renderer.height) * -2 + 1, 0);
-        }
+    attribute vec3 position;
+    attribute vec3 next;
+    attribute vec3 prev;
+    attribute vec2 uv;
+    attribute float side;
 
-        const tmp = new Vec3();
+    uniform mat4 modelViewMatrix;
+    uniform mat4 projectionMatrix;
+    uniform vec2 uResolution;
+    uniform float uDPR;
+    uniform float uThickness;
+    uniform float uMiter;
 
-        requestAnimationFrame(update);
-        function update(t) {
-            requestAnimationFrame(update);
+    varying vec2 vUv;
 
-            lines.forEach((line) => {
-                for (let i = line.points.length - 1; i >= 0; i--) {
-                    if (!i) {
-                        tmp
-                            .copy(mouse)
-                            .add(line.mouseOffset)
-                            .sub(line.points[i])
-                            .multiply(line.spring);
-                        line.mouseVelocity.add(tmp).multiply(line.friction);
-                        line.points[i].add(line.mouseVelocity);
-                    } else {
-                        line.points[i].lerp(line.points[i - 1], 0.9);
-                    }
-                }
-                line.polyline.updateGeometry();
-            });
+    vec4 getPosition() {
+        mat4 mvp = projectionMatrix * modelViewMatrix;
+        vec4 current = mvp * vec4(position, 1);
+        vec4 nextPos = mvp * vec4(next, 1);
+        vec4 prevPos = mvp * vec4(prev, 1);
 
-            renderer.render({ scene });
-        }
-    }, []);
+        vec2 aspect = vec2(uResolution.x / uResolution.y, 1);    
+        vec2 currentScreen = current.xy / current.w * aspect;
+        vec2 nextScreen = nextPos.xy / nextPos.w * aspect;
+        vec2 prevScreen = prevPos.xy / prevPos.w * aspect;
+    
+        vec2 dir1 = normalize(currentScreen - prevScreen);
+        vec2 dir2 = normalize(nextScreen - currentScreen);
+        vec2 dir = normalize(dir1 + dir2);
+    
+        vec2 normal = vec2(-dir.y, dir.x);
+        normal /= mix(1.0, max(0.3, dot(normal, vec2(-dir1.y, dir1.x))), uMiter);
+        normal /= aspect;
 
-    return (
-        <div className={style.cana} ref={canvasRef}>
+        float pixelWidthRatio = 1.0 / (uResolution.y / uDPR);
+        float pixelWidth = current.w * pixelWidthRatio;
+        normal *= pixelWidth * uThickness;
+        current.xy -= normal * side;
+    
+        return current;
+    }
 
-        </div>
-    )
-};
+    void main() {
+        vUv = uv;
+        gl_Position = getPosition();
+    }
+`;
 
-export default Polly;
+const defaultFragment = /* glsl */ `
+    precision highp float;
+
+    uniform vec3 uColor;
+    
+    varying vec2 vUv;
+
+    void main() {
+        gl_FragColor.rgb = uColor;
+        gl_FragColor.a = 1.0;
+    }
+`;
