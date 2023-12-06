@@ -37,7 +37,7 @@ const Education = () => {
                     initial={{ right: '60%' }}
                     whileInView={{ right: "53%" }}
                     className={style.one}>
-                    <Card sx={{ padding: '10px 15px', display: 'flex', flexDirection: 'column', gap: '10px', borderRadius: '10px', background: 'var(--white)', boxShadow: '3px 4px 13px var(--beige)' }} variant="outlined">
+                    <Card sx={{ padding: '10px 15px', display: 'flex', flexDirection: 'column', gap: '10px', borderRadius: '10px', background: 'var(--white)', boxShadow: '1px 3px 10px var(--white)' }} variant="outlined">
                         <h3 style={{ color: 'var(--dark-color)' }}>Fci Suez Canal University</h3>
                         <h5 style={{ color: 'var(--dark-color)', opacity: ".8" }}>Ismalia | 2020-2024</h5>
                         <p style={{ color: 'var(--dark-color)', fontWeight: "500", lineHeight: "1.5" }}>at Faculty of computer science and information have learned alot about software engineering and take different rules at many of projects and tasks we did </p>
@@ -47,7 +47,7 @@ const Education = () => {
                     initial={{ left: '60%' }}
                     whileInView={{ left: "53%" }}
                     className={style.two}>
-                    <Card sx={{ padding: '10px 15px', display: 'flex', flexDirection: 'column', gap: '10px', borderRadius: '10px', background: 'var(--white)', boxShadow: '3px 4px 13px var(--beige)' }} variant="outlined">
+                    <Card sx={{ padding: '10px 15px', display: 'flex', flexDirection: 'column', gap: '10px', borderRadius: '10px', background: 'var(--white)', boxShadow: '1px 3px 10px var(--white)' }} variant="outlined">
                         <h3 style={{ color: 'var(--dark-color)' }}>ITI</h3>
                         <h5 style={{ color: 'var(--dark-color)', opacity: ".6" }}>Ismalia | 2023</h5>
                         <p style={{ color: 'var(--dark-color)', fontWeight: "500", lineHeight: "1.5" }}>Summer Course that i trained on a team with a top developer and engineers worked on alot of projects and have alot of experience</p>
@@ -57,7 +57,7 @@ const Education = () => {
                     initial={{ right: '60%' }}
                     whileInView={{ right: "53%" }}
                     className={style.three}>
-                    <Card sx={{ padding: '10px 15px', display: 'flex', flexDirection: 'column', gap: '10px', borderRadius: '10px', background: 'var(--white)', boxShadow: '3px 4px 13px var(--beige)' }} variant="outlined">
+                    <Card sx={{ padding: '10px 15px', display: 'flex', flexDirection: 'column', gap: '10px', borderRadius: '10px', background: 'var(--white)', boxShadow: '1px 3px 10px var(--white)' }} variant="outlined">
                         <h3 style={{ color: 'var(--dark-color)' }}>Udacity</h3>
                         <h5 style={{ color: 'var(--dark-color)', opacity: ".8" }}>Remote | 2022-2023</h5>
                         <p style={{ color: 'var(--dark-color)', fontWeight: "500", lineHeight: "1.5" }}>Software engeneering full course with a top instructors , gained alot of experience and knowladge </p>
