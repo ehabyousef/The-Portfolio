@@ -21,8 +21,8 @@ body {
 }
 .light {
   --dark-color: hsl(10, 10%, 93%);
-  --green: #146956;
-  --beige: #cab08f;
+  --green: #606c38;
+  --beige: #dda15e;
   --white: rgb(24, 23, 23);
   --red: #da3a27;
 }
