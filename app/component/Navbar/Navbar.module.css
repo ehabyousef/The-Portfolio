@@ -3,7 +3,7 @@
   text-decoration: none;
   color: var(--beige);
   background-color: transparent;
-  transition: 0.5s;
+  transition: all 0.5s;
 }
 .navlist:hover {
   background-color: transparent;
