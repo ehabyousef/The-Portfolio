@@ -78,7 +78,7 @@
   border: none;
   border-radius: 0.5em;
   color: #1a1a1a;
-  box-shadow: 0.5em 0.5em 0.5em var(--dark-color);
+  /* box-shadow: 0.5em 0.5em 0.5em var(--dark-color); */
   cursor: pointer;
 }
 
