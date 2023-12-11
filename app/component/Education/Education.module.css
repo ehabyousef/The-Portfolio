@@ -6,7 +6,7 @@
   left: 50%;
   transform: translateX(-50%);
   transform-origin: top;
-  box-shadow: 1px 3px 10px var(--white) ;
+  box-shadow: 1px 3px 10px var(--white);
 }
 .one,
 .two,
@@ -48,5 +48,5 @@
   height: 50px !important;
   padding: 3px;
   border-radius: 50%;
-  fill: var(--dark-color);
+  fill: var(--dark-color) !important;
 }
