@@ -26,3 +26,6 @@ body {
   --white: rgb(24, 23, 23);
   --red: #da3a27;
 }
+::-webkit-scrollbar {
+  display: none;
+}
