@@ -82,7 +82,7 @@ const page = () => {
                 }}
                 className={style.title}
             >
-                Imagination Trumps Knowledge!
+                Imagination Trumps Knowledge 🧠
             </motion.h1>
             <Box sx={{ margin: '3rem 0' }}>
                 <Grid container spacing={4} >
