@@ -4,10 +4,9 @@ import React, { useEffect, useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import style from './Navbar.module.css';
 import Link from 'next/link';
-const navItems = ['Home', 'About', 'Projects'];
 import CloseIcon from '@mui/icons-material/Close';
 import { usePathname } from 'next/navigation'
-
+import { motion, useScroll } from "framer-motion"
 
 const Navbar = (props) => {
     const { window } = props;
@@ -15,6 +14,7 @@ const Navbar = (props) => {
     console.log(pathname);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [mode, setmode] = useState(localStorage.getItem('currentMode' ?? 'dark'))
+    const { scrollYProgress } = useScroll();
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
@@ -117,7 +117,10 @@ const Navbar = (props) => {
     }, [mode])
     return (
         <Box sx={{ display: 'flex', maxHeight: '8vh', transition: '.3s', position: 'relative' }}>
-            <AppBar className={style.appbar} component="nav">
+            <AppBar component="nav" sx={{ backgroundColor: "var(--dark-color)", position: "fixed", boxShadow: "none", alignItems: "center", padding: '10px' }}>
+                <motion.div
+                    style={{ scaleX: scrollYProgress }}
+                    className={style.scrollbar} ></motion.div>
                 <Toolbar sx={{ width: '100%', display: 'flex', justifyContent: { sx: 'flex-start', md: 'center' }, alignItems: 'center' }}>
                     <IconButton
 
