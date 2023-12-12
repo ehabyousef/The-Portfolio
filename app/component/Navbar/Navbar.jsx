@@ -117,7 +117,7 @@ const Navbar = (props) => {
     }, [mode])
     return (
         <Box sx={{ display: 'flex', maxHeight: '8vh', transition: '.3s', position: 'relative' }}>
-            <dev className={style.appbar}>
+            <AppBar className={style.appbar} component="nav">
                 <Toolbar sx={{ width: '100%', display: 'flex', justifyContent: { sx: 'flex-start', md: 'center' }, alignItems: 'center' }}>
                     <IconButton
 
@@ -177,7 +177,7 @@ const Navbar = (props) => {
                     </div>
 
                 </Toolbar>
-            </dev>
+            </AppBar>
 
             <Drawer
                 container={container}
