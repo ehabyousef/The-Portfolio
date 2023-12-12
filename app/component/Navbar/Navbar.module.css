@@ -36,7 +36,6 @@
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
-  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); */
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   overflow: hidden;
 }
