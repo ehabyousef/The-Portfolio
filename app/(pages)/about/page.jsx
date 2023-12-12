@@ -55,7 +55,7 @@ const page = () => {
                 }}
                 className={style.title}
             >
-                Passion Fuels Purpose 
+                Passion Fuels Purpose!{" "}
             </motion.h1>
             {/* intro  */}
             <Grid container spacing={6} sx={{
