@@ -104,7 +104,6 @@ const page = () => {
                     sx={{
                         display: 'flex', flexDirection: { xs: "row", lg: "column" }, gap: ".5rem", flexWrap: { xs: 'nowrap', md: 'wrap' }, color: 'var(--white)',
                         justifyContent: { xs: "space-evenly", xlg: 'space-between' },
-                        // fontSize:{xs:'1rem',lg}
                     }}>
                     <div >
                         <span><AnimateNum value={35} />+</span>
