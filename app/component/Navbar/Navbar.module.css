@@ -8,6 +8,13 @@
 .navlist:hover {
   background-color: transparent;
 }
+.appbar {
+  background-color: var(--dark-color);
+  position: fixed;
+  box-shadow: none;
+  align-items: center;
+  padding: 10px;
+}
 .button {
   position: relative;
   border: none;
