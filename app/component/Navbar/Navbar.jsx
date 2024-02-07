@@ -13,7 +13,13 @@ const Navbar = (props) => {
     const pathname = usePathname()
     console.log(pathname);
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [mode, setmode] = useState(localStorage.getItem('currentMode' ?? 'dark'))
+    const [mode, setmode] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('currentMode') || 'dark';
+        } else {
+            return 'dark';
+        }
+    });
     const { scrollYProgress } = useScroll();
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
@@ -156,13 +162,16 @@ const Navbar = (props) => {
                         className={style.toggleWrapper}>
                         <input
                             onClick={() => {
-                                localStorage.setItem(
-                                    "currentMode",
-                                    mode === "dark" ? "light" : "dark"
-                                );
-                                setmode(localStorage.getItem("currentMode"));
+                                if (typeof window !== 'undefined') {
+                                    localStorage.setItem(
+                                        "currentMode",
+                                        mode === "dark" ? "light" : "dark"
+                                    );
+                                    setmode(localStorage.getItem("currentMode"));
+                                }
                             }}
                             type="checkbox" className="dn" id="dn" />
+
 
                         <label for="dn" className={style.toggle}>
                             <span className={style.toggle__handler}>
