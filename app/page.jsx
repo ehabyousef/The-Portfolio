@@ -7,6 +7,29 @@ import Link from "next/link";
 import Transition from "./component/Transition/Transition";
 import style from "./page.module.css";
 
+const text = 'Ihab Y Lasheen';
+const pVarients = {
+  hidden: {
+    opacity: 0
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  }
+
+}
+const spanVarients = {
+  hidden: {
+    opacity: 0
+  },
+  visible: {
+    opacity: 1
+  }
+
+}
+
 export default function Home() {
   return (
     <>
@@ -16,16 +39,22 @@ export default function Home() {
           <Image src={dev} className={style.img} alt="hero"></Image>
           <div className={style.text}>
             <motion.h1
-              initial={{ opacity: 0, translateY: 100 }}
-              animate={{ translateY: 0, opacity: 1, transition: { delay: .1, duration: 1 } }}
-            >Ihab Y Lasheen</motion.h1>
+              variants={pVarients}
+              initial='hidden'
+              animate='visible'
+            >
+              {text.split("").map((char, ind) => (
+                <motion.span key={ind} variants={spanVarients}>{char}</motion.span>
+              )
+              )}
+            </motion.h1>
             <motion.h3
               initial={{ opacity: 0, translateY: 80 }}
-              animate={{ translateY: 0, opacity: 1, transition: { delay: .1, duration: 1 } }}
+              animate={{ translateY: 0, opacity: 1, transition: { delay: .5, duration: 1 } }}
             >Turning Vision Into Reality With Code And Design. </motion.h3>
             <motion.p
               initial={{ opacity: 0, translateY: 60 }}
-              animate={{ translateY: 0, opacity: 1, transition: { delay: .1, duration: 1 } }}
+              animate={{ translateY: 0, opacity: 1, transition: { delay: .3, duration: 1 } }}
             >
               As a skilled Front-end developer, I am dedicated to turning ideas
               into innovative web applications. Explore my latest projects and
