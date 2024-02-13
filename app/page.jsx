@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import dev from "../public/imags/circle.png";
 import { motion } from "framer-motion";
@@ -31,10 +31,24 @@ const spanVarients = {
 }
 
 export default function Home() {
+  const [x, setx] = useState(0)
+  const [y, sety] = useState(0)
+  useEffect(() => {
+    const handleCursor = (e) => {
+      setx(e.clientX - 100)
+      sety(e.clientY - 50)
+    }
+    window.addEventListener('mousemove', handleCursor)
+    return () => {
+      window.removeEventListener('mousemove', handleCursor)
+    }
+  }, [])
+
   return (
     <>
       <Transition />
       <div className={style.cana}>
+        <motion.div animate={{ x, y }} className={style.cursor}></motion.div>
         <div className={style.content}>
           <Image src={dev} className={style.img} alt="hero"></Image>
           <div className={style.text}>
