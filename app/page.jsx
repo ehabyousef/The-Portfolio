@@ -85,7 +85,7 @@ export default function Home() {
               className={style.botons}
             >
               <Link
-                href="ehabY.pdf"
+                href="EhabYousef.pdf"
                 target="_blank"
                 download={true}
                 className={style.resume}

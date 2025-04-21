@@ -30,14 +30,12 @@ const Navbar = (props) => {
   }, []);
 
   useEffect(() => {
-    if (mode === "light") {
-      document.body.classList.add("light");
-      document.body.classList.remove("dark");
-    } else {
-      document.body.classList.add("dark");
-      document.body.classList.remove("light");
-    }
+    if (!mode) return; // wait for mode to be set
+    document.body.classList.toggle("dark", mode === "dark");
+    document.body.classList.toggle("light", mode === "light");
   }, [mode]);
+
+  if (mode === null) return null; // <- prevents rendering until mode is loaded
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
