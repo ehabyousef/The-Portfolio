@@ -7,42 +7,40 @@ import Link from "next/link";
 import Transition from "./component/Transition/Transition";
 import style from "./page.module.css";
 
-const text = 'Ihab Y Lasheen';
+const text = "Ihab Y Lasheen";
 const pVarients = {
   hidden: {
-    opacity: 0
+    opacity: 0,
   },
   visible: {
     opacity: 1,
     transition: {
       staggerChildren: 0.15,
     },
-  }
-
-}
+  },
+};
 const spanVarients = {
   hidden: {
-    opacity: 0
+    opacity: 0,
   },
   visible: {
-    opacity: 1
-  }
-
-}
+    opacity: 1,
+  },
+};
 
 export default function Home() {
-  const [x, setx] = useState(0)
-  const [y, sety] = useState(0)
+  const [x, setx] = useState(0);
+  const [y, sety] = useState(0);
   useEffect(() => {
     const handleCursor = (e) => {
-      setx(e.clientX - 100)
-      sety(e.clientY - 50)
-    }
-    window.addEventListener('mousemove', handleCursor)
+      setx(e.clientX - 100);
+      sety(e.clientY - 50);
+    };
+    window.addEventListener("mousemove", handleCursor);
     return () => {
-      window.removeEventListener('mousemove', handleCursor)
-    }
-  }, [])
+      window.removeEventListener("mousemove", handleCursor);
+    };
+  }, []);
 
   return (
     <>
@@ -52,23 +50,30 @@ export default function Home() {
         <div className={style.content}>
           <Image src={dev} className={style.img} alt="hero"></Image>
           <div className={style.text}>
-            <motion.h1
-              variants={pVarients}
-              initial='hidden'
-              animate='visible'
-            >
+            <motion.h1 variants={pVarients} initial="hidden" animate="visible">
               {text.split("").map((char, ind) => (
-                <motion.span key={ind} variants={spanVarients}>{char}</motion.span>
-              )
-              )}
+                <motion.span key={ind} variants={spanVarients}>
+                  {char}
+                </motion.span>
+              ))}
             </motion.h1>
             <motion.h3
               initial={{ opacity: 0, translateY: 80 }}
-              animate={{ translateY: 0, opacity: 1, transition: { delay: .5, duration: 1 } }}
-            >Turning Vision Into Reality With Code And Design. </motion.h3>
+              animate={{
+                translateY: 0,
+                opacity: 1,
+                transition: { delay: 0.5, duration: 1 },
+              }}
+            >
+              Turning Vision Into Reality With Code And Design.{" "}
+            </motion.h3>
             <motion.p
               initial={{ opacity: 0, translateY: 60 }}
-              animate={{ translateY: 0, opacity: 1, transition: { delay: .3, duration: 1 } }}
+              animate={{
+                translateY: 0,
+                opacity: 1,
+                transition: { delay: 0.3, duration: 1 },
+              }}
             >
               As a skilled Front-end developer, I am dedicated to turning ideas
               into innovative web applications. Explore my latest projects and
@@ -76,12 +81,22 @@ export default function Home() {
             </motion.p>
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { delay: .1, duration: 1 } }}
-              className={style.botons}>
-              <Link href="ehabY.pdf" target="_blank" download={true} className={style.resume}>
+              animate={{ opacity: 1, transition: { delay: 0.1, duration: 1 } }}
+              className={style.botons}
+            >
+              <Link
+                href="ehabY.pdf"
+                target="_blank"
+                download={true}
+                className={style.resume}
+              >
                 <b>resume</b>
               </Link>
-              <Link href="mailto:ehabyousef022@gmail.com" target="_blank" className={style.contact}>
+              <Link
+                href="mailto:ehabyousef022@gmail.com"
+                target="_blank"
+                className={style.contact}
+              >
                 <div className="svg-wrapper-1">
                   <div className="svg-wrapper">
                     <svg
@@ -101,10 +116,9 @@ export default function Home() {
                 <span>Contact</span>
               </Link>
             </motion.div>
-
           </div>
         </div>
-      </div >
+      </div>
     </>
   );
 }
