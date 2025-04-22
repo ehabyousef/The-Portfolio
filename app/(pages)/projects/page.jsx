@@ -16,7 +16,7 @@ import hedaya from "../../../public/imags/hedaya.png";
 import drinks from "../../../public/imags/drink.png";
 import ScrollTop from "@/app/component/ScrollTop/ScrollTop";
 import Transition from "@/app/component/Transition/Transition";
-const page = () => {
+const Page = () => {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
@@ -352,4 +352,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
