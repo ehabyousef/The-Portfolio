@@ -35,7 +35,7 @@ const Navbar = (props) => {
     document.body.classList.toggle("light", mode === "light");
   }, [mode]);
 
-  if (mode === null) return null; // <- prevents rendering until mode is loaded
+  if (mode === null) return null; // prevents rendering until mode is loaded
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -45,6 +45,11 @@ const Navbar = (props) => {
     const newMode = mode === "dark" ? "light" : "dark";
     localStorage.setItem("currentMode", newMode);
     setMode(newMode);
+  };
+
+  // Determine if a link is active based on the current pathname
+  const isActive = (href) => {
+    return pathname === href;
   };
 
   const drawer = (
@@ -67,19 +72,32 @@ const Navbar = (props) => {
           marginTop: "1rem",
         }}
       >
-        {["Home", "About", "Projects"].map((text) => (
-          <Link
-            key={text}
-            onClick={handleDrawerToggle}
-            className={style.navlist}
-            href={`/${text === "Home" ? "" : text.toLowerCase()}`}
-          >
-            <button className={style.button}>
-              <span className={style.span}>{text}</span>
-              <span className={style.span}>{text}</span>
-            </button>
-          </Link>
-        ))}
+        {["Home", "About", "Projects"].map((text) => {
+          const href = `/${text === "Home" ? "" : text.toLowerCase()}`;
+          return (
+            <Link
+              key={text}
+              onClick={handleDrawerToggle}
+              className={style.navlist}
+              href={href}
+            >
+              <button className={style.button}>
+                <span
+                  className={style.span}
+                  style={{ color: isActive(href) ? "var(--beige)" : "inherit" }}
+                >
+                  {text}
+                </span>
+                <span
+                  className={style.span}
+                  style={{ color: isActive(href) ? "var(--beige)" : "inherit" }}
+                >
+                  {text}
+                </span>
+              </button>
+            </Link>
+          );
+        })}
       </Box>
 
       {/* Social Links (unchanged) */}
@@ -119,7 +137,7 @@ const Navbar = (props) => {
           sx={{
             width: "100%",
             display: "flex",
-            justifyContent: { sx: "flex-start", md: "center" },
+            justifyContent: { xs: "flex-start", md: "center" },
             alignItems: "center",
           }}
         >
@@ -135,18 +153,31 @@ const Navbar = (props) => {
           </IconButton>
 
           <Box sx={{ display: { xs: "none", sm: "flex" }, gap: "30px" }}>
-            {["Home", "About", "Projects"].map((text) => (
-              <Link
-                key={text}
-                className={style.navlist}
-                href={`/${text === "Home" ? "" : text.toLowerCase()}`}
-              >
-                <button className={style.button}>
-                  <span className={style.span}>{text}</span>
-                  <span className={style.span}>{text}</span>
-                </button>
-              </Link>
-            ))}
+            {["Home", "About", "Projects"].map((text) => {
+              const href = `/${text === "Home" ? "" : text.toLowerCase()}`;
+              return (
+                <Link key={text} className={style.navlist} href={href}>
+                  <button className={style.button}>
+                    <span
+                      className={style.span}
+                      style={{
+                        color: isActive(href) ? "var(--beige)" : "inherit",
+                      }}
+                    >
+                      {text}
+                    </span>
+                    <span
+                      className={style.span}
+                      style={{
+                        color: isActive(href) ? "var(--beige)" : "inherit",
+                      }}
+                    >
+                      {text}
+                    </span>
+                  </button>
+                </Link>
+              );
+            })}
           </Box>
 
           {/* Dark Mode Toggle */}
