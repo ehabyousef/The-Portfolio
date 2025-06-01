@@ -27,7 +27,7 @@ const Footer = () => {
         </div>
         <div className={style.child}>
           <Link
-            href="https://www.instagram.com/ehab.yousef.66/?utm_source=qr&igshid=MThlNWY1MzQwNA%3D%3D"
+            href="https://www.instagram.com/ibn__yousef/"
             target="_blank"
             className={style.bot}
           >
