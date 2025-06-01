@@ -1,7 +1,6 @@
 import { Typography } from "@mui/material";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import Icons from "./Icons";
-import { motion, useScroll } from "framer-motion";
 
 export default function ExperDetails({ position, company, companyLink, time, address, work }) {
     const ref = useRef(null)

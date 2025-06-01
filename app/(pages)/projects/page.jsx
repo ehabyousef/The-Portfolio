@@ -1,19 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import style from "./page.module.css";
 import { Box, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import commerce from "../../../public/imags/e-commerce.png";
 import bioscope from "../../../public/imags/biosope.png";
 import bolt from "../../../public/imags/bolt.png";
 import prayer from "../../../public/imags/prayer.png";
 import portfolio from "../../../public/imags/portfolio.png";
 import framer from "../../../public/imags/framer.png";
 import hedaya from "../../../public/imags/hedaya.png";
-import drinks from "../../../public/imags/drink.png";
 import ScrollTop from "@/app/component/ScrollTop/ScrollTop";
 import Transition from "@/app/component/Transition/Transition";
 const Page = () => {
@@ -270,11 +268,11 @@ const Page = () => {
                 }}
               >
                 <Project
-                  type="Portfolio"
-                  title="React portfolio"
-                  img={portfolio}
-                  link="https://portfolio-75316.web.app/"
-                  github="https://github.com/ehabyousef/portfolio_React"
+                  type="website"
+                  title="hedaya e-commerce"
+                  img={hedaya}
+                  link="https://hedaya-fd5c7.web.app/"
+                  github="https://github.com/ehabyousef/Hedaya"
                 />
               </Grid>
               <Grid
@@ -287,11 +285,11 @@ const Page = () => {
                 }}
               >
                 <Project
-                  type="Website"
-                  title="Prayer Guide"
-                  img={prayer}
-                  link="https://silly-squirrel-b16c62.netlify.app/"
-                  github="https://github.com/ehabyousef/prayer-guide"
+                  type="Animation"
+                  title="animation Web"
+                  img={framer}
+                  github="https://github.com/ehabyousef/awwards"
+                  link="https://awwards-puce.vercel.app/"
                 />
               </Grid>
               <Grid
@@ -320,11 +318,11 @@ const Page = () => {
                 }}
               >
                 <Project
-                  type="website"
-                  title="hedaya e-commerce"
-                  img={hedaya}
-                  link="https://hedaya-fd5c7.web.app/"
-                  github="https://github.com/ehabyousef/Hedaya"
+                  type="Portfolio"
+                  title="React portfolio"
+                  img={portfolio}
+                  link="https://portfolio-75316.web.app/"
+                  github="https://github.com/ehabyousef/portfolio_React"
                 />
               </Grid>
               <Grid
@@ -337,11 +335,11 @@ const Page = () => {
                 }}
               >
                 <Project
-                  type="Animation"
-                  title="animation Web"
-                  img={framer}
-                  github="https://github.com/ehabyousef/awwards"
-                  link="https://awwards-puce.vercel.app/"
+                  type="Website"
+                  title="Prayer Guide"
+                  img={prayer}
+                  link="https://silly-squirrel-b16c62.netlify.app/"
+                  github="https://github.com/ehabyousef/prayer-guide"
                 />
               </Grid>
             </Grid>
